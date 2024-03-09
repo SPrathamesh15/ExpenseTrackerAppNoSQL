@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+      <link rel="stylesheet" href="../style/index.css">
+      <title>Report</title>
+</head>
+<body class='body'>
+    <div class="container">
+  <h1 class='head-report'>REPORT</h1>
+
+    <div style='margin-top: 50px;margin-left: 50px'>
+        <label for="itemsPerPage" class='itemsperpage-head'>Items per Page:</label>
+          <select id="itemsPerPage" onchange="updateItemsPerPage()" class='itemsperpage'>
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="30">30</option>
+            <option value="40">40</option>
+            <option value="50">50</option>
+          </select>
+      <button class='report' id="daily-btn">Show Daily Expenses</button>
+      <button class='report' id="weekly-btn">Show Weekly Expenses</button>
+      <button class='report' id="monthly-btn">Show Monthly Expenses</button>
+      <button class='report' id="yearly-btn">Show Yearly Expenses</button>
+    </div>
+
+   <!-- Add unique IDs to the div elements -->
+<div id="daily-section">
+  <!-- Daily Expenses Table -->
+  <h3 style='text-align: center; color: white; font-weight:400 ; margin-top: 30px; margin-bottom: 15px; letter-spacing: 0.2rem' id='daily'>Daily</h3>
+  <table id="daily-table">
+      <thead>
+        <tr>
+          <th scope="col">Date</th>
+          <th scope="col">Description</th>
+          <th scope="col">Category</th>
+          <th scope="col">Income</th>
+          <th scope="col">Expense</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Data will be dynamically added here -->
+      </tbody>
+  </table>
+</div>
+
+<div id="weekly-section">
+  <!-- Weekly Expenses Table -->
+  <h3 style='text-align: center; color: white;font-weight:400 ; margin-top: 30px; margin-bottom: 15px; letter-spacing: 0.2rem' id='weekly'>Weekly</h3>
+  <table id="weekly-table">
+      <thead>
+        <tr>
+          <th scope="col">Date</th>
+          <th scope="col">Description</th>
+          <th scope="col">Category</th>
+          <th scope="col">Income</th>
+          <th scope="col">Expense</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Data will be dynamically added here -->
+      </tbody>
+  </table>
+</div>
+
+<div id="monthly-section">
+  <!-- Monthly Expenses Table -->
+  <h3 style='text-align: center; color: white;font-weight:400 ; margin-top: 30px; margin-bottom: 15px; letter-spacing: 0.2rem' id='monthly'>Monthly</h3>
+  <table id="monthly-table">
+      <thead>
+        <tr>
+          <th scope="col">Date</th>
+          <th scope="col">Description</th>
+          <th scope="col">Category</th>
+          <th scope="col">Income</th>
+          <th scope="col">Expense</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Data will be dynamically added here -->
+      </tbody>
+  </table>
+</div>
+
+<div id="yearly-section">
+  <!-- Yearly Expenses Table -->
+  <h3 style='text-align: center; color: white;font-weight:400 ; margin-top: 30px; margin-bottom: 15px; letter-spacing: 0.2rem' id='year'>Yearly</h3>
+  <table  id="yearly-table">
+      <thead>
+        <tr>
+          <th scope="col">Date</th>
+          <th scope="col">Description</th>
+          <th scope="col">Category</th>
+          <th scope="col">Income</th>
+          <th scope="col">Expense</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Data will be dynamically added here -->
+      </tbody>
+    </table>
+</div>
+<div id="pagination-container" class="pagination-container"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.5/axios.min.js"></script>
+    <script src='./report.js'></script>
+</body>
+</html>

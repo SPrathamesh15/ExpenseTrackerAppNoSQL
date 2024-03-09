@@ -1,0 +1,117 @@
+html, body{
+    height: 100%;
+    width: 100%;
+}
+::-webkit-scrollbar {
+    display: none;
+}
+.head-label{
+    color: white; 
+    text-align: center; 
+    margin-top: 80px; 
+    letter-spacing: 3px;
+}
+.head-label-signup{
+    color: white; 
+    text-align: center; 
+    margin-top: 50px; 
+    letter-spacing: 3px;
+}
+
+.form-control{
+    width: 75%;
+    background-color: #212529;
+    border: none;
+    color: white;
+}
+.form-label{
+    color: white;
+}
+.form-text{
+    color: white;
+}
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+}
+.container{
+    border-radius: 50px;
+    background-color: black;
+    width: 500px;
+    height: 500px; 
+    border: solid;
+    box-shadow: 2px 2px 40px 1px white;
+}
+.mb-3{
+    margin-left: 100px;
+}
+.p{
+    color: white; 
+    margin-left: 100px
+}
+.btn-primary{
+    margin-top: 10px;
+}
+.head-label-reset{
+    color: white; 
+    text-align: center; 
+    margin-top: 120px; 
+    letter-spacing: 3px;
+}
+@media  screen and (max-width: 600px) {
+    .container {border-radius: 50px;
+    background-color: black;
+    width: 350px;
+    height: 400px; 
+    border: solid;
+    box-shadow: 2px 2px 50px 1px white;
+    }
+    .head-label{
+        color: white; 
+        text-align: center; 
+        margin-top: -150px; 
+        margin-bottom: 150px;
+        letter-spacing: 3px;
+        border: solid;
+        padding: 10px;
+    }
+    .head-label-reset{
+        color: white; 
+        text-align: center; 
+        margin-top: -120px; 
+        margin-bottom: 100px;
+        letter-spacing: 3px;
+        border:solid;
+        padding: 10px;
+    }
+    .head-label-signup{
+        font-size: 22px;
+        color: white; 
+        text-align: center; 
+        margin-top: -150px; 
+        margin-bottom: 120px;
+        letter-spacing: 3px;
+        border: solid;
+        padding: 10px;
+    }
+    .form-control{
+        width: 90%;
+        background-color: #212529;
+        border: none;
+        color: white;
+    }
+    .mb-3{
+        margin-left: 25px;
+    }
+    .p{
+        margin-left: 25px;
+    }
+    .form-text{
+        font-size: 12px;
+    }
+    .btn-primary{
+        margin-top: 5px;    
+    }
+}
