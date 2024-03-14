@@ -12,12 +12,14 @@
 <body class ='body'>
     <header id="main-header">
         <div class="container">
-            <div>
-                <h1 id="header-title" class='header'>
-                    <span style='color: #0eeab7'>Add</span> Expense 
-                    <span id="premium-status" class="premium-status"></span>
-                    <button class="button-64" role="button" id='buy-premium' style='margin-left: 820px; margin-top: -50px;'><span class="text">Buy Premium</span></button>
-                </h1>
+            <div class= 'row'>
+                <div class="col-6" style='border: none;margin-top: 0px;margin-bottom: -100px;margin-left: 250px;'>
+                    <h1 class='header'><span style='color: #0eeab7' >Add</span> Expense </h1>
+                </div>
+                <div class="col-6" style='border: none;margin-top: 33px;margin-bottom: -100px;margin-right: -300px;margin-left: -170px;'>
+                    <button id="premium-status" class="premium-status">You are a Premium User!</button>
+                    <button class="premium-status" role="button" id='buy-premium'>Buy Premium</button>
+                </div>
             </div>
             <div class="row">
                 <div class="col-6">
@@ -50,13 +52,13 @@
                                 <option value="Medical">Medical</option>
                                 <option value="Fun">Fun</option>
                                 <option value="Fuel">Fuel</option>
+                                <option value="Drink">Drink</option>
                                 <option value="Travelling">Travelling</option>
                               </select>
                       </div>
                         <button type="submit" class="btn btn-primary" style='margin-top: 20px'>Submit</button>
                     </form>
                     <button class="bn30" role="button" id='show-leaderboard'>Show LeaderBoard</button><br>
-                    <button class="bn30" role="button" id='download'>Download</button><br>
                     <button type="click" onclick="window.open('../report/report.html', '_blank')" id ="report" class="bn30">Report</button>
                 </div>
                 
@@ -69,11 +71,8 @@
         </div>
         <div class = 'container' style='margin-top: 50px'>
             <h1 class='head-leaderboard' id = 'leaderboard-tag'>LeaderBoard</h1>
-            <h1 class = 'head-leaderboard' id = 'downloadedFiles-tag'>Downloaded Files</h1>
             <ul id="points-table" class="list-group"> </ul>
-            <ul id="downloaded-table" class="list-group"> </ul>
             <div id="leaderboard-pagination-container" class="pagination-container" style='margin-bottom: 50px;'></div>
-            <div id="files-pagination-container" class="pagination-container" style='margin-bottom: 50px; margin-top: -50px;'></div>
         </div>
     </header>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.5/axios.min.js"></script>

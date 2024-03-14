@@ -1,8 +1,5 @@
 const Expense = require('../models/expense');
 const User = require('../models/user')
-// const sequelize = require('../util/database')
-const S3Services = require('../services/S3services')
-const FilesDownloaded = require('../models/filesDownloaded')
 
 exports.getAddExpense = (req, res, next) => {
   res.render('expense/add-expense', {
@@ -55,13 +52,13 @@ exports.getAllExpenses = async (req, res, next) => {
         const itemsPerPage = 5;
         const skip = (page - 1) * itemsPerPage;
 
-        const countPromise = Expense.countDocuments({ userId: req.user._id });
-        const expensesPromise = Expense.find({ userId: req.user._id })
+        const Count = Expense.countDocuments({ userId: req.user._id });
+        const Expenses = Expense.find({ userId: req.user._id })
                                         .skip(skip)
                                         .limit(itemsPerPage)
                                         .exec();
 
-        const [count, expenses] = await Promise.all([countPromise, expensesPromise]);
+        const [count, expenses] = await Promise.all([Count, Expenses]);
 
         const totalPages = Math.ceil(count / itemsPerPage);
 
@@ -71,61 +68,6 @@ exports.getAllExpenses = async (req, res, next) => {
         res.status(500).json({ error: err.message });
     }
 };
-
-// exports.downloadExpenses = async (req, res) => {
-//   try {
-//     const expenses = await req.user.getExpenses();
-//     console.log(expenses)
-//     const stringifiedExpenses = JSON.stringify(expenses);
-//     const userId = req.user.id
-//     const filename = `Expense${userId}/${new Date()}.txt`;
-//     const fileURL = await S3Services.uploadToS3(stringifiedExpenses, filename);
-//     res.status(200).json({ fileURL, success: true })
-//   } catch (err){
-//     console.log(err)
-//     res.status(500).json({ fileURL: '', success: false, err: err })
-//   }
-// }
-
-// exports.postFileURLS = async (req, res) => {
-//   try{
-//   const fileURL = req.body.fileUrls
-//   const userId = req.user.id;
-
-//   console.log('file url from backend',fileURL)
-//   const Details = await FilesDownloaded.create(
-//     { fileURL: fileURL,
-//       userId: userId }
-//   )
-//     res.status(201).json({ newFilesUrlDetails: Details });
-//     console.log('Files added to server!');
-//   } catch (err){
-//     console.log(err)
-//     res.status(500).json({ success: false, err: err })
-//   }
-// }
-
-// exports.getFileURLS = async (req, res) => {
-//   try {
-//       const page = parseInt(req.query.page) || 1; 
-//       const itemsPerPage = 5; 
-//       const offset = (page - 1) * itemsPerPage;
-
-//       const files = await FilesDownloaded.findAll({
-//           where: { userId: req.user.id },
-//           offset,
-//           limit: itemsPerPage,
-//       });
-//       const totalCount = await FilesDownloaded.count();
-//       const totalPages = Math.ceil(totalCount / itemsPerPage);
-
-//       res.status(200).json({ allFileURLS: files, totalPages, currentPage: page });
-//   } catch (err) {
-//       console.log(err);
-//       res.status(500).json({ success: false, err: err });
-//   }
-// };
-
 
 exports.deleteExpense = async (req, res, next) => {
     const expenseId = req.params.expenseId;

@@ -4,101 +4,13 @@ var buyPremium = document.getElementById('buy-premium')
 var table = document.getElementById('points-table')
 var showLeaderboard = document.getElementById('show-leaderboard')
 var leaderboardTag = document.getElementById('leaderboard-tag')
-var downloadedFilesTag = document.getElementById('downloadedFiles-tag')
 var report = document.getElementById('report')
-var downloads = document.getElementById('download')
 var premiumStatusElement = document.getElementById('premium-status');
 
 // Adding a single event listener to handle form submission
 form.addEventListener('submit', handleFormSubmission);
 buyPremium.addEventListener('click', BuyPremium);
 showLeaderboard.addEventListener('click', ShowLeaderboard)
-downloads.addEventListener('click', download)
-
-async function download(e){
-    e.preventDefault()
-    const token = localStorage.getItem('token');
-    axios.get("http://localhost:3000/expense/download", {
-        headers: {'Authorization' : token}})
-        .then(response => {
-            console.log('download', response)
-            if (response.status === 200){
-                var a = document.createElement('a')
-                a.href = response.data.fileURL
-                a.download = 'myexpense.csv'
-                a.click()
-                postFiles(a.href)
-                getFiles()
-            }
-        })
-        .catch(err=> console.log(err))
-}
-async function postFiles(fileURL){
-    const token = localStorage.getItem('token');
-    console.log('fileURl from frontend',fileURL)
-    const fileURLS = {
-        fileUrls: fileURL
-    }
-    axios.post("http://localhost:3000/expense/postfileurls", fileURLS, {
-        headers: {'Authorization' : token}})
-        .then(response => console.log(response))
-        .catch(err => console.log('postfiles frontend',err))
-}
-
-// Update the getFiles function in your frontend JavaScript
-async function getFiles(page=1) {
-    const token = localStorage.getItem('token');
-    axios.get(`http://localhost:3000/expense/getfileurls?page=${page}`, {
-        headers: { 'Authorization': token }
-    })
-        .then(response => {
-            console.log('getfiles: ', response.data);
-            showDownloadedFiles(response.data.allFileURLS);
-            downloadedFilesTag.style.display = 'block';
-            displayFilesPagination(response.data.totalPages, response.data.currentPage);
-        })
-        .catch(err => console.log('postfiles frontend', err));
-}
-
-function displayFilesPagination(totalPages, currentPage) {
-    const paginationContainer = document.getElementById('files-pagination-container');
-    paginationContainer.innerHTML = ''; 
-
-    for (let i = 1; i <= totalPages; i++) {
-        const pageButton = document.createElement('button');
-        pageButton.className = 'pagination-btn';
-        pageButton.innerText = i;
-        pageButton.addEventListener('click', () => getFiles(i));
-
-        if (i === currentPage) {
-            pageButton.classList.add('active');
-        }
-
-        paginationContainer.appendChild(pageButton);
-    }
-}
-
-
-function showDownloadedFiles(fileUrls) {
-    const parentNode = document.getElementById('downloaded-table');
-    console.log('showDownloadedFiles')
-    parentNode.innerHTML = '';
-    
-    for (var i = 0; i < fileUrls.length; i++) {
-        console.log('showing the Files details on page: ', fileUrls[i]);
-        const li = document.createElement('li');
-        li.className = 'lists';
-        li.id = fileUrls[i].userId;
-
-        const fileUrlElement = document.createElement('span');
-        fileUrlElement.className = 'fileUrl';
-        fileUrlElement.innerHTML = `<strong>FileURL: </strong>${fileUrls[i].fileURL}`;
-        // Appending elements to the li
-        li.appendChild(fileUrlElement);
-
-        parentNode.appendChild(li);
-    }
-}
 
 
 async function ShowLeaderboard(page=1) {
@@ -109,7 +21,6 @@ async function ShowLeaderboard(page=1) {
             showLeaderboardOnScreen(response.data.allLeaderBoardUsers);
             showLeaderboard.style.display = 'block';
             leaderboardTag.style.display = 'block';
-            downloadedFilesTag.style.display = 'none';
             displayLeaderboardPagination(response.data.totalPages, response.data.currentPage);
         })
         .catch(err => console.log(err));
@@ -293,17 +204,16 @@ async function handlePageLoad() {
         const isPremiumUser = response.data.permuimStatus;
         console.log(isPremiumUser)
         if (isPremiumUser){
-            premiumStatusElement.innerText = "You are a Premium User"
+            premiumStatusElement.style.display = 'block'
             buyPremium.style.display = 'none'
             leaderboardTag.style.display = 'none'; 
-            downloadedFilesTag.style.display = 'none';
             
         } else{
             console.log('not a premium user')
+            premiumStatusElement.style.display = 'none'
             showLeaderboard.style.display = 'none'
             leaderboardTag.innerText = ''
             report.style.display = 'none'
-            downloads.style.display = 'none'
         }
         
     } catch (err) {
